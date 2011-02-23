@@ -1,7 +1,7 @@
 Summary:	OpenGL-FreeType Library
 Name:		OGLFT
 Version:	0.9
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/oglft/oglft-%{version}.tar.gz
@@ -12,6 +12,7 @@ BuildRequires:	automake
 BuildRequires:	freetype-devel
 BuildRequires:	gle-devel
 BuildRequires:	libtool
+BuildRequires:	qt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,6 +41,9 @@ Static version of OGLFT.
 %setup -q -n oglft-%{version}
 
 %build
+QTDIR=/usr
+CPPFLAGS=-I/usr/include/qt
+export QTDIR CPPFLAGS
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -53,6 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libOGLFT.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -68,7 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/html
 %{_includedir}/oglft
 %attr(755,root,root) %{_libdir}/libOGLFT.so
-%{_libdir}/libOGLFT.la
 
 %files static
 %defattr(644,root,root,755)
