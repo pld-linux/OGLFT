@@ -1,7 +1,7 @@
 Summary:	OpenGL-FreeType Library
 Name:		OGLFT
 Version:	0.9
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/oglft/oglft-%{version}.tar.gz
@@ -45,10 +45,13 @@ QTDIR=/usr
 CPPFLAGS=-I/usr/include/qt
 export QTDIR CPPFLAGS
 %{__aclocal}
-%{__autoconf}
+# autoconf requires libtoolize, otherwise causes endless libtool loop
+#%%{__autoconf}
 %{__autoheader}
-%{__automake}
-%{__libtoolize}
+# automake requires aclocal and autoconf
+#%%{__automake}
+# libtoolize requires autoconf, otherwise ../libtool[400]: CDPATH: not found
+#%%{__libtoolize}
 %configure
 %{__make}
 
