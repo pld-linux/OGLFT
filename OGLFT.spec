@@ -1,11 +1,12 @@
 Summary:	OpenGL-FreeType Library
 Name:		OGLFT
 Version:	0.9
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/oglft/oglft-%{version}.tar.gz
 # Source0-md5:	c3a8e0993f98edb7611c20f46631d2a6
+Patch0:		link.patch
 URL:		http://oglft.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -39,19 +40,17 @@ Static version of OGLFT.
 
 %prep
 %setup -q -n oglft-%{version}
+%patch0 -p1
 
 %build
 QTDIR=/usr
 CPPFLAGS=-I/usr/include/qt
 export QTDIR CPPFLAGS
+%{__libtoolize}
 %{__aclocal}
-# autoconf requires libtoolize, otherwise causes endless libtool loop
-#%%{__autoconf}
+%{__autoconf}
 %{__autoheader}
-# automake requires aclocal and autoconf
-#%%{__automake}
-# libtoolize requires autoconf, otherwise ../libtool[400]: CDPATH: not found
-#%%{__libtoolize}
+%{__automake}
 %configure
 %{__make}
 

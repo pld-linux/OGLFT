@@ -1,0 +1,18 @@
+--- oglft-0.9/liboglft/Makefile.am~	2003-10-01 12:53:35.000000000 +0200
++++ oglft-0.9/liboglft/Makefile.am	2013-12-07 10:48:05.469840970 +0100
+@@ -21,4 +21,5 @@
+ lib_LTLIBRARIES = libOGLFT.la
+ libOGLFT_la_SOURCES = OGLFT.cpp OGLFT.h
+ libOGLFT_la_LDFLAGS = -version-info 1:0:0
++libOGLFT_la_LIBADD = -lstdc++
+ INCLUDES = -I$(top_srcdir)/include
+--- oglft-0.9/configure.ac~	2003-10-01 16:12:29.000000000 +0200
++++ oglft-0.9/configure.ac	2013-12-07 10:56:17.216504077 +0100
+@@ -107,7 +107,6 @@
+     qt_save_LDFLAGS=$LDFLAGS
+     qt_save_LIBS=$LIBS
+     CPPFLAGS="$CPPFLAGS -I${QTDIR}/include"
+-    LDFLAGS="$LDFLAGS -L${QTDIR}/lib"
+ 
+     QTLIB=""
+     LIBS="$qt_save_LIBS -lqt"
