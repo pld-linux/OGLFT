@@ -2,7 +2,7 @@ Summary:	OpenGL-FreeType Library
 Summary(pl.UTF-8):	Biblioteka OpenGL-FreeType
 Name:		OGLFT
 Version:	0.9
-Release:	5
+Release:	6
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/oglft/oglft-%{version}.tar.gz
